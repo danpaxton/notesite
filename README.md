@@ -1,4 +1,4 @@
-# EntreNet
+# Notesite
 
 ## Install npm and clone respository
 To install npm visit https://github.com/nvm-sh/nvm#installing-and-updating
