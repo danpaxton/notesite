@@ -5,8 +5,8 @@ To install npm visit https://github.com/nvm-sh/nvm#installing-and-updating
 
 Clone repository and navigate to main folder.
 ```
-git clone https://github.com/danpaxton/entrenet.git
-cd entrenet
+git clone https://github.com/danpaxton/notesite.git
+cd notesite
 ```
 
 ## Client
