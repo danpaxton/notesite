@@ -1,0 +1,37 @@
+.nav-bar {
+    display: flex;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: black;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: baseline;
+    padding-right: 10px;
+    gap: 15px;
+}
+
+.login-tab {
+    font-weight: bold;
+}
+
+.tab {
+    cursor: pointer;
+    color: white;
+    font-size: large;
+}
+
+.tab:hover {
+    color: lightgray;
+}
+
+.logo {
+    color: white;
+    font-weight: bolder;
+    font-size: xx-large;
+    padding-left: 10px;
+}
