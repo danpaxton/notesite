@@ -8,7 +8,7 @@ import Notes from './notes/Notes'
 import Login from './login/Login';
 import axios from 'axios';
 
-export const api = axios.create({ baseURL: "https://notesite-ou65.onrender.com/", withCredentials: true });
+export const api = axios.create({ baseURL: "https://notesite-g6sv.onrender.com/", withCredentials: true });
 
 function App() {
   // eslint-disable-next-line no-unused-vars
