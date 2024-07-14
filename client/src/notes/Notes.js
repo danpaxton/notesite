@@ -152,7 +152,7 @@ const Notes = ({ notes, setNotes, authError }) => {
                         Notes
                         <div className="flex w-full items-center gap-1 text-lg">
                             <FaMagnifyingGlass/>
-                            <input type="text" value={search} className="w-full shadow border border-gray-400 rounded-xl h-6 p-2 font-normal text-sm " onChange={handleSearchText}/>
+                            <input type="text" value={search} className="w-full shadow border border-gray-400 rounded-lg h-6 p-2 font-normal text-sm " onChange={handleSearchText}/>
                         </div>
                     </div>
                     <ul className="flex flex-col">  
@@ -160,7 +160,7 @@ const Notes = ({ notes, setNotes, authError }) => {
                         notes.sort(sortDatePinned).filter(searchFilter).map((e, i) => (
                             <li key={i}>
                                 { firstPinned(notes, i) ?
-                                    <div className="ml-1 mt-3 text-sm flex items-center gap-1 font-semibold text-black">
+                                    <div className="ml-1 mt-3 text-sm flex items-center font-semibold text-black">
                                         <FaBookmark/>Bookmarks
                                     </div>
                                 :
