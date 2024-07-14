@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 
 const { createSecretToken } = require("../util/SecretToken");
 
-userRoutes.route("/signup/").post(async (req, res) => {
+userRoutes.route("/signup").post(async (req, res) => {
  let db_connect = dbo.getDb();
  let myquery = { username : req.body.username };
  db_connect
@@ -34,7 +34,7 @@ userRoutes.route("/signup/").post(async (req, res) => {
     });
   });
 
-userRoutes.route("/login/").post(async (req, res) => {
+userRoutes.route("/login").post(async (req, res) => {
   let db_connect = dbo.getDb();
   let { username, password } = req.body;
   db_connect
