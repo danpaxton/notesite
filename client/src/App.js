@@ -1,62 +1,45 @@
 import { useState } from 'react';
-import './App.css';
 import Navbar from './navbar/Navbar';
 import { useCookies } from "react-cookie";
 import { BrowserRouter as Router, Routes, Route }
   from 'react-router-dom';
 
-import Resources from './pages/Resources'
-import Login from './profile/Login';
+import Notes from './notes/Notes'
+import Login from './login/Login';
 import axios from 'axios';
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#3f51b5',
-    },
-    secondary: {
-      main: '#ffffff',
-    },
-  },
-})
-
-export const api = axios.create({ baseURL: "http://localhost:5000/", withCredentials: true});
+export const api = axios.create({ baseURL: "http://localhost:5000/", withCredentials: true });
 
 function App() {
-  const [tabValue, setTabValue] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [cookies, removeCookie] = useCookies([]);
-  const [resources, setResources] = useState([]);
-  const [login, setLogin] = useState({ logged: false, username: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [notes, setNotes] = useState([]);
 
-  const formatDate = date => {
-      const d = new Date(date);
-      return (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear().toString().slice(2, 4)
-  };
+  const authError = () => {
+    setLoggedIn(false);
+    setNotes([]);
+    removeCookie('token');
+  }
   
-  const sortDate = (a, b) => {
-      const d1 = new Date(a.date)
-      const d2 = new Date(b.date)
-      if (d1 < d2) {
-          return 1;
-      }
-      if (d1 > d2) {
-          return -1;
-      }
-      return 0
-  };
-
   return (
-      <ThemeProvider theme={theme}>
         <Router>
-          <Navbar cookies={cookies} removeCookie={removeCookie} tabValue={tabValue} setTabValue={setTabValue} login={login} setLogin={setLogin} />
+          <Navbar 
+            authError={authError} setNotes={setNotes}
+            loggedIn={loggedIn} setLoggedIn={setLoggedIn}
+          />
           <Routes>
-            <Route exact path='/' element={<Resources sortDate={sortDate} formatDate={formatDate} resources={resources} setResources={setResources} login={login} />} />
-            <Route path='/login' element={<Login login={login} setLogin={setLogin} />} />
+            <Route exact path='/' element={
+              <Notes
+                notes={notes} setNotes={setNotes}
+                authError={authError}
+              />}/>
+            <Route path='/login' element={
+              <Login 
+                setLoggedIn={setLoggedIn} setNotes={setNotes}
+              />}/>
           </Routes>
         </Router>
-      </ThemeProvider>
   )
 }
 export default App;

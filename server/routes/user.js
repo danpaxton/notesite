@@ -8,18 +8,18 @@ const { createSecretToken } = require("../util/SecretToken");
 
 userRoutes.route("/signup").post(async (req, res) => {
  let db_connect = dbo.getDb();
- let myquery = { email : req.body.email };
+ let myquery = { username : req.body.username };
  db_connect
    .collection("users")
    .findOne(myquery)
    .then(async found => {
      if (found) {
-       return res.json({ message: "User already exists.", success: false });
+       return res.json({ message: "User already exists", success: false });
      }
      let newvalues = {
-        logged: true,
         username: req.body.username,
-        password: await bcrypt.hash(req.body.password, 12)
+        password: await bcrypt.hash(req.body.password, 12),
+        notes: []
      };
     db_connect
       .collection("users")
@@ -29,8 +29,7 @@ userRoutes.route("/signup").post(async (req, res) => {
           withCredentials: true,
           httpOnly: false,
         });
-        const user = {...newvalues, _id: data.insertedId };
-        return res.json({ message: "User signed in successfully", success: true, user });
+        return res.json({ message: "Sign up successful", success: true });
       });
     });
   });
@@ -53,16 +52,13 @@ userRoutes.route("/login").post(async (req, res) => {
         withCredentials: true,
         httpOnly: false,
       });
-      return res.json({ message: "Logged in succesfully", success: true, user });
+      return res.json({ message: "Login succesful", success: true, notes: user.notes });
     });
 });
 
 userRoutes.route("/").get(async (req, res) => {
   let db_connect = dbo.getDb();
   let token = req.cookies.token;
-  if (!token) {
-    return res.json({ status: false });
-  }
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
     if (err) {
       return res.json({ status: false });
@@ -72,7 +68,34 @@ userRoutes.route("/").get(async (req, res) => {
         .findOne({ _id : new ObjectId(data.id)})
         .then(user => {
           if (user) {
-            return res.json({ status: true, user });
+            return res.json({ status: true, notes: user.notes });
+          } else {
+            return res.json({ status: false });
+          }
+      });
+    }
+  });
+});
+
+userRoutes.route("/update").post(async (req, res) => {
+  let db_connect = dbo.getDb();
+  let token = req.cookies.token;
+  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+    if (err) {
+      return res.json({ status: false });
+    } else {
+      let query = { _id: new ObjectId(data.id) };
+      let newvalues = {
+        $set: { 
+          notes: req.body.notes,
+        },
+      }
+      db_connect
+        .collection('users')
+        .updateOne(query, newvalues)
+        .then(user => {
+          if (user) {
+            return res.json({ status: true });
           } else {
             return res.json({ status: false });
           }

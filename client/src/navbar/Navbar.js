@@ -1,54 +1,53 @@
-import './Navbar.css'
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom"
-import { Box, Button } from '@mui/material'
+import { FaFileLines} from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import { api } from '../App';
 
-const Navbar = ({ cookies, removeCookie, login, setLogin, tabValue }) => {
+const Navbar = ({ setLoggedIn, loggedIn, authError, setNotes }) => {
     const navigate = useNavigate();
 
-    const handleSignUpClick = () => {
+    const handleLogout = () => {
+        authError();
         navigate('/login');
     };
 
-    const handleLogout = () => {
-        setLogin({ logged: false, username: "" });
-        removeCookie("token");
-        handleSignUpClick();
-    };
-    
     useEffect(() => {
-        if (!cookies.token) {
-            handleSignUpClick();
+        try {
+            api.get("/").then(({ data }) => {
+                if (data.status) {
+                    setLoggedIn(true);
+                    setNotes(data.notes);
+                } else {
+                    handleLogout();
+                }
+            });
+        } catch (e) {
+            console.log(e);
         }
-        api.get("/").then(({ data }) => {
-            if (data.status) {
-                setLogin(data.user);
-            } else {
-                removeCookie("token");
-                navigate("/login");
-            }
-        });
-    }, [cookies, navigate, removeCookie])
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
     return (
-        <Box color="secondary" className="nav-bar">
-            <Box className="logo">Notesite</Box>
-            <Box className="nav-buttons">
-                <Box className="tab" sx={{ color: !login.logged ? 'gray' : 'white' }}>NOTES</Box>
-                <Box className="login-tab tab">
-                    {login.logged ?
-                        <Box onClick={handleLogout}>
-                            Logout
-                        </Box> : 
-                        <Box onClick={handleSignUpClick}>
-                            SIGN UP
-                        </Box>
+        <nav className="bg-gray-800 fixed top-0 z-10 w-full h-10 p-6 flex items-center">
+            <div className="w-full flex justify-between items-center">
+                <div className="text-2xl text-white flex items-center gap-1 font-bold cursor-pointer">
+                    <FaFileLines/>
+                    Notesite
+                </div>
+                <button className="mx-2 font-bold text-white">
+                    { loggedIn ?
+                        <div onClick={handleLogout} className="hover:text-gray-300">
+                            LOGOUT
+                        </div>
+                        :
+                        <div className="hover:text-gray-300">
+                            LOGIN
+                        </div>
                     }
-                </Box>
-            </Box>
-        </Box>
-    );
+                </button>
+            </div>
+        </nav>
+    )
 };
 
 export default Navbar;
