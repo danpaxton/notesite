@@ -71,7 +71,8 @@ const Notes = ({ notes, setNotes, authError }) => {
 
     const handleDelete = () => {
         if (noteId !== null) {
-            const newNotes = notes.filter((e, i) => e !== getNotes(notes)[noteId]);
+            const t = getNotes(notes)[noteId];
+            const newNotes = notes.filter((e, i) => e !== t);
             updateNotes(newNotes);
             setNotes(newNotes);
         }

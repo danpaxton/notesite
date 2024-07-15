@@ -5,7 +5,10 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 app.use(cors({
-  origin: ["https://notesite-omit.onrender.com"],
+  origin: [
+    "http://localhost:3000",
+    "https://notesite-omit.onrender.com"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
