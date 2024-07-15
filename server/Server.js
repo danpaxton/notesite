@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 app.use(cors({
   origin: ["https://notesite-omit.onrender.com"],
   methods: ["GET", "POST"],
