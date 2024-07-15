@@ -16,7 +16,7 @@ const Login = ({ setNotes, setLoggedIn }) => {
             setError('');
             return true;
         }
-    }
+    };
 
     const handleSignup = async () => {
         if (!validForm()) {
