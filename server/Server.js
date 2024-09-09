@@ -6,7 +6,7 @@ require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 app.use(cors({
   origin: [
-    "https://notesite-delta.vercel.app"
+    "https://notesite-delta.vercel.app/"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
