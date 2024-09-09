@@ -153,7 +153,7 @@ const Notes = ({ notes, setNotes, authError }) => {
                         Notes
                         <div className="flex w-full items-center gap-1 text-lg">
                             <FaMagnifyingGlass/>
-                            <input type="text" value={search} className="w-full shadow border border-gray-400 rounded-lg h-6 p-2 font-normal text-sm " onChange={handleSearchText}/>
+                            <input type="text" value={search} className="w-full shadow border bg-gray-200 border-gray-400 rounded-lg h-6 p-2 font-normal text-sm " onChange={handleSearchText}/>
                         </div>
                     </div>
                     <ul className="flex flex-col">  
