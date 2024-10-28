@@ -3,10 +3,10 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 app.use(cors({
   origin: [
-    "https://notesite-delta.vercel.app",
+    "https://notesite-nu.vercel.app/",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
