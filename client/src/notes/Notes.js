@@ -91,7 +91,7 @@ const Notes = ({ notes, setNotes, authError }) => {
 
     const handlePin = () => {
         if (noteId !== null) {
-            const n  = getNotes(notes);
+            const n = getNotes(notes);
             const pinValue = !n[noteId].pinned
             n[noteId].pinned = pinValue;
             setPinned(pinValue);
