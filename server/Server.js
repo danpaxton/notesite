@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const { createSecretToken } = require("./util/SecretToken");
 const { ObjectId } =  require("mongodb");
 
-require("dotenv").config({ path: "./config.env" });
+//require("dotenv").config({ path: "./config.env" });
 mongoose.connect(process.env.ATLAS_URI)
 
 app.use(cors({
