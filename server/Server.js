@@ -13,7 +13,7 @@ mongoose.connect(process.env.ATLAS_URI)
 
 app.use(cors({
   origin: [
-    "https://notesite-nu.vercel.app/",
+    "https://notesite-nu.vercel.app",
   ],
   methods: ["GET", "POST"],
   credentials: true,
