@@ -10,7 +10,7 @@ const { ObjectId } =  require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
 app.use(cors({
-  origin: ["http://localhost:3000"],
+  origin: ["https://notesite-five.vercel.app"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
