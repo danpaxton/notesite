@@ -116,43 +116,41 @@ const Notes = ({ notes, setNotes, authError, token }) => {
     };
     
 
-    return (
-        <div className="text-black h-screen w-screen overflow-scroll pt-12">
-            { noteId !== null ?
-                <div className="bg-white text-black h-full w-full flex flex-col">
-                    <div className="flex justify-between items-center pt-3 px-6">
-                        <button className="text-gray-800 border-b-gray-300 text-2xl hover:text-gray-700" onClick={handleBack}>
-                            <FaArrowLeftLong/>
+    return noteId !== null ?
+            <div className="h-screen w-screen">
+                <div className=" bg-white fixed top-12 h-12 w-full flex justify-between items-center px-6">
+                    <button className="text-gray-800 border-b-gray-300 text-2xl hover:text-gray-700" onClick={handleBack}>
+                        <FaArrowLeftLong/>
+                    </button>
+                    <div className={"flex items-center gap-5"}>
+                        { noteSettings ?
+                            <div className="flex items-center gap-5">
+                                <button onClick={handlePin} className={pinned ? "text-blue-600 hover:text-blue-500" : "text-gray-800 hover:text-gray-700" }>
+                                    { pinned  ? <FaBookmark/> : <FaRegBookmark/> }
+                                </button>
+                                <button onClick={handleDelete} className=" text-red-600 hover:text-red-500">
+                                    <FaTrashCan/>
+                                </button>
+                            </div>
+                            : 
+                            null
+                        }
+                        <button className="text-xl text-gray-800 hover:text-gray-700" onClick={() => setNoteSettings(!noteSettings)}>
+                            <FaEllipsis/>   
                         </button>
-                        <div className={"flex items-center gap-5"}>
-                            { noteSettings ?
-                                <div className="flex items-center gap-5">
-                                    <button onClick={handlePin} className={pinned ? "text-blue-600 hover:text-blue-500" : "text-gray-800 hover:text-gray-700" }>
-                                        { pinned  ? <FaBookmark/> : <FaRegBookmark/> }
-                                    </button>
-                                    <button onClick={handleDelete} className=" text-red-600 hover:text-red-500">
-                                        <FaTrashCan/>
-                                    </button>
-                                </div>
-                                : 
-                                null
-                            }
-                            <button className="text-xl text-gray-800 hover:text-gray-700" onClick={() => setNoteSettings(!noteSettings)}>
-                                <FaEllipsis/>   
-                            </button>
-                        </div>
                     </div>
-                    <NoteEditor handleSave={handleSave} note={getNotes(notes)[noteId]} />
                 </div>
-                :
-                <>
-                <div className="py-4 font-bold px-4 md:px-16">
-                    <div className="flex flex-col text-3xl gap-2 font-bold text-black">
+                <NoteEditor handleSave={handleSave} note={getNotes(notes)[noteId]} />
+            </div>
+            :
+            <div className="w-screen pt-12">
+                <div className="py-4 px-4 md:px-16 overflow-scroll flex flex-col gap-1">
+                    <div className="text-3xl font-bold text-black">
                         Notes
-                        <div className="flex w-full items-center gap-1 text-lg">
-                            <FaMagnifyingGlass/>
-                            <input type="text" value={search} className="w-full shadow border bg-gray-200 border-gray-400 rounded-lg h-6 p-2 font-normal text-sm " onChange={handleSearchText}/>
-                        </div>
+                    </div>
+                    <div className="flex w-full items-center gap-1 text-lg">
+                        <FaMagnifyingGlass/>
+                        <input type="text" value={search} className="w-full shadow border bg-gray-200 border-gray-400 rounded-lg h-6 p-2 font-normal text-sm " onChange={handleSearchText}/>
                     </div>
                     <ul className="flex flex-col">  
                     {   
@@ -185,9 +183,6 @@ const Notes = ({ notes, setNotes, authError, token }) => {
                 <button onClick={handleNew} className="fixed bottom-10 right-10 p-6 rounded-full text-3xl shadow-lg shadow-gray-400 text-white bg-gray-800 hover:bg-gray-700">
                     <FaPenToSquare/>
                 </button>
-                </>
-            }
-        </div>
-    );
+            </div>
 };
 export default Notes;

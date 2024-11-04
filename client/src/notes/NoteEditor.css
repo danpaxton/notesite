@@ -2,4 +2,5 @@
 .tox-tinymce {
     height: 100% !important;
     border: none !important;
+    border-radius: 0px !important;
 }
