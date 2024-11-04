@@ -7,7 +7,6 @@ const NoteEditor = ({ handleSave, note }) => {
   const handleChange = (newValue, editor) => {
     if (note) {
       note.text = newValue;
-      console.log(note.text)
       handleSave();
     }
   };

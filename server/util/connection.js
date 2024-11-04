@@ -6,7 +6,7 @@ mongoose.connect(process.env.ATLAS_URI)
 const noteSchema = new mongoose.Schema({
   text: String,
   pinned: Boolean,
-  editedAt: Date
+  editedAt: String
 })
 
 const userSchema = new mongoose.Schema({
