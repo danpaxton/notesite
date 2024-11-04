@@ -1,45 +1,26 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { createSecretToken } = require("./util/SecretToken");
+const { createSecretToken } = require("./util/secretToken");
+const { UserModel } = require("./util/connection");
 const { ObjectId } =  require("mongodb");
-
-//require("dotenv").config({ path: "./config.env" });
-mongoose.connect(process.env.ATLAS_URI)
+require("dotenv").config({ path: "./config.env" });
 
 app.use(cors({
-  origin: [
-    "https://notesite-nu.vercel.app",
-  ],
+  origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Schemas
-const noteSchema = new mongoose.Schema({
-  text: String,
-  pinned: Boolean,
-  editedAt: Date
-})
-
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  notes: [noteSchema]
-})
-
-const UserModel = mongoose.model("users", userSchema);
-
 // Account routing
 app.post("/signup", (req, res) => {
- let myquery = { username : req.body.username };
- UserModel
+  let myquery = { username : req.body.username };
+  UserModel
    .findOne(myquery)
    .then(async found => {
      if (found) {
@@ -127,6 +108,9 @@ app.post("/update", async (req, res) => {
   });
 });
 
-app.listen(3001, () => {
-  console.log(`Server is running`);
-});
+// development
+if (process.env.PORT) {
+  app.listen(process.env.PORT);
+}
+
+module.exports = app;
