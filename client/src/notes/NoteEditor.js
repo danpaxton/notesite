@@ -19,9 +19,8 @@ const NoteEditor = ({ handleSave, note }) => {
         initialValue={note ? note.text : "" }
         init={{
           menubar: false,
-          toolbar_mode: 'sliding',
+          toolbar_mode: 'scrolling',
           statusbar: false,
-          toolbar_location: 'bottom',
           highlight_on_focus: false,
           plugins: 'anchor autolink codesample image link lists media searchreplace table visualblocks wordcount linkchecker',
           toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent',

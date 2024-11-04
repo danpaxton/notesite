@@ -66,7 +66,7 @@ const Login = ({ setNotes, setLoggedIn, setToken }) => {
     };
 
     return (
-        <div className="bg-gray-300 flex flex-col gap-3 items-center h-screen">
+        <div className="flex flex-col gap-3 items-center h-screen">
             <div className="mt-20 md:mt-48 bg-white rounded-lg border border-gray-400 shadow text-black w-auto md:w-[450px] h-auto p-6">
                 <div className="flex flex-col items-center">
                     <div className="font-bold mb-2 w-full">Username</div>

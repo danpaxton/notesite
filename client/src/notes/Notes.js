@@ -117,9 +117,9 @@ const Notes = ({ notes, setNotes, authError, token }) => {
     
 
     return (
-        <div className="bg-gray-300 text-black h-screen overflow-scroll pt-12">
+        <div className="text-black h-screen w-screen overflow-scroll pt-12">
             { noteId !== null ?
-                <div className="bg-white text-black h-full flex flex-col">
+                <div className="bg-white text-black h-full w-full flex flex-col">
                     <div className="flex justify-between items-center pt-3 px-6">
                         <button className="text-gray-800 border-b-gray-300 text-2xl hover:text-gray-700" onClick={handleBack}>
                             <FaArrowLeftLong/>
@@ -142,9 +142,7 @@ const Notes = ({ notes, setNotes, authError, token }) => {
                             </button>
                         </div>
                     </div>
-                    <div className="h-full w-full">
-                        <NoteEditor handleSave={handleSave} note={getNotes(notes)[noteId]} />
-                    </div>
+                    <NoteEditor handleSave={handleSave} note={getNotes(notes)[noteId]} />
                 </div>
                 :
                 <>
