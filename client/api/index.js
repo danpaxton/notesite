@@ -9,11 +9,7 @@ const { UserModel } = require("./util/connection");
 const { ObjectId } =  require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
-app.use(cors({
-  origin: ["https://notesite-six.vercel.app"],
-  methods: ["GET", "POST"],
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
