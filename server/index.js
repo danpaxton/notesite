@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { createSecretToken } = require("./util/secretToken");
@@ -9,13 +8,8 @@ const { UserModel } = require("./util/connection");
 const { ObjectId } =  require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
-app.use(cors({
-  origin: ["http://localhost:3000" && "https://notesite-five.vercel.app"],
-  methods: ["GET", "POST"],
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
 
 // Account routing
 app.post("/signup", (req, res) => {
@@ -34,12 +28,8 @@ app.post("/signup", (req, res) => {
     UserModel
       .create(newValues)
       .then(data => {
-        res.clearCookie("token");
-        res.cookie("token", createSecretToken(data.insertedId), {
-          withCredentials: true,
-          httpOnly: false,
-        });
-        return res.json({ success: true });
+        const token = createSecretToken(data.insertedId);
+        return res.json({ success: true, token });
       });
     });
   });
@@ -56,18 +46,14 @@ app.post("/login", (req, res) => {
       if (!auth) {
         return res.json({ success: false, message: 'Invalid credentials' });
       }
-      res.clearCookie("token");
-      res.cookie("token", createSecretToken(user._id), {
-        withCredentials: true,
-        httpOnly: false,
-      });
-      return res.json({ success: true, notes: user.notes });
+      const token = createSecretToken(user._id);
+      return res.json({ success: true, notes: user.notes, token });
     });
 });
 
 // Data routing
-app.get("/", (req, res) => {
-  let token = req.cookies.token;
+app.post("/", (req, res) => {
+  let token = req.body.token;
   jwt.verify(token, process.env.TOKEN_KEY, (err, data) => {
     if (err) {
       return res.json({ status: false });
@@ -86,7 +72,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/update", async (req, res) => {
-  let token = req.cookies.token;
+  let token = req.body.token;
   jwt.verify(token, process.env.TOKEN_KEY, (err, data) => {
     if (err) {
       return res.json({ status: false });
@@ -109,10 +95,8 @@ app.post("/update", async (req, res) => {
     }
   });
 });
-
 // development
 if (process.env.PORT) {
   app.listen(process.env.PORT);
 }
-
 module.exports = app;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import { api } from '../App';
 
-const Login = ({ setNotes, setLoggedIn }) => {
+const Login = ({ setNotes, setLoggedIn, setToken }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -25,6 +25,7 @@ const Login = ({ setNotes, setLoggedIn }) => {
         try {
             const { data } = await api.post('/signup', { username, password });
             if (data.success) {
+                setToken(data.token);
                 setLoggedIn(true);
                 navigate('/');
                 setError('');
@@ -43,6 +44,7 @@ const Login = ({ setNotes, setLoggedIn }) => {
         try {
             const { data } = await api.post('/login', { username, password });
             if (data.success) {
+                setToken(data.token);
                 setNotes(data.notes);
                 setLoggedIn(true);
                 navigate('/');

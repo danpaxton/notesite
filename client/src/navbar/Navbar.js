@@ -3,7 +3,7 @@ import { FaFileLines} from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { api } from '../App';
 
-const Navbar = ({ setLoggedIn, loggedIn, authError, setNotes }) => {
+const Navbar = ({ setLoggedIn, loggedIn, authError, setNotes, token }) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -13,7 +13,7 @@ const Navbar = ({ setLoggedIn, loggedIn, authError, setNotes }) => {
 
     useEffect(() => {
         try {
-            api.get("/").then(({ data }) => {
+            api.post("/", { token }).then(({ data }) => {
                 if (data.status) {
                     setLoggedIn(true);
                     setNotes(data.notes);

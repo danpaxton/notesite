@@ -12,7 +12,7 @@ const Note = () => ({
     editedAt: new Date()
 });
 
-const Notes = ({ notes, setNotes, authError }) => {
+const Notes = ({ notes, setNotes, authError, token }) => {
     const navigate = useNavigate();
     const [noteId, setNoteId] = useState(null);
     const [pinned, setPinned] = useState(false);
@@ -34,7 +34,7 @@ const Notes = ({ notes, setNotes, authError }) => {
 
     const updateNotes = async (newNotes) => {
         try {
-            api.post('/update', { notes: newNotes }).then(({ data }) => {
+            api.post('/update', { notes: newNotes, token }).then(({ data }) => {
                 if (!data.status) {
                     authError();
                     navigate('/login');
