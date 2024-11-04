@@ -10,7 +10,7 @@ const { ObjectId } =  require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
 app.use(cors({
-  origin: ["https://notesite-five.vercel.app"],
+  origin: ["http://localhost:3000" && "https://notesite-five.vercel.app"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
@@ -34,6 +34,7 @@ app.post("/signup", (req, res) => {
     UserModel
       .create(newValues)
       .then(data => {
+        res.clearCookie("token");
         res.cookie("token", createSecretToken(data.insertedId), {
           withCredentials: true,
           httpOnly: false,
@@ -55,6 +56,7 @@ app.post("/login", (req, res) => {
       if (!auth) {
         return res.json({ success: false, message: 'Invalid credentials' });
       }
+      res.clearCookie("token");
       res.cookie("token", createSecretToken(user._id), {
         withCredentials: true,
         httpOnly: false,
