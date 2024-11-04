@@ -12,7 +12,7 @@ const NoteEditor = ({ handleSave, note }) => {
   };
 
   return (
-    <div className='fixed top-24 h-full w-full'>
+    <div className='fixed top-24 h-4/5 w-full shadow-lg'>
       <Editor
         apiKey="j5j03cv3b4fs3ehd53fcxgds9xrm7ntj9k00hac9qwjpuz6h"
         onEditorChange={handleChange}
