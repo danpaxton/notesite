@@ -3,8 +3,8 @@ const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { createSecretToken } = require("./util/secretToken");
-const { UserModel } = require("./util/connection");
+const { createSecretToken } = require("./utils/secretToken");
+const { UserModel } = require("./utils/connection");
 const { ObjectId } =  require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 

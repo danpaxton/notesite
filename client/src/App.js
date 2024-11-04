@@ -8,10 +8,9 @@ import Notes from './notes/Notes'
 import Login from './login/Login';
 import axios from 'axios';
 
-export const api = axios.create({ baseURL: "http://localhost:5000" && "https://notesite-three.vercel.app" });
+export const api = axios.create({ baseURL: "https://notesite-three.vercel.app" });
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
   const { token, setToken, removeToken } = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
   const [notes, setNotes] = useState([]);

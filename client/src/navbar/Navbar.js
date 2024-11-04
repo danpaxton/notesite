@@ -15,8 +15,8 @@ const Navbar = ({ setLoggedIn, loggedIn, authError, setNotes, token }) => {
         try {
             api.post("/", { token }).then(({ data }) => {
                 if (data.status) {
-                    setLoggedIn(true);
                     setNotes(data.notes);
+                    setLoggedIn(true);
                 } else {
                     handleLogout();
                 }
