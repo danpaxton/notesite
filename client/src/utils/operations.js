@@ -28,6 +28,7 @@ export const getText = (data, raw) => {
             res.push('No additional notes');
         }
     }
+    res.push('');
     return res;
 };
 
