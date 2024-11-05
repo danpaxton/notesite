@@ -1,4 +1,4 @@
-export const getText = (data) => {
+export const getText = (data, raw) => {
     const res = []
     let left = 0, right = 0;
     while (right < data.length) {
@@ -20,11 +20,13 @@ export const getText = (data) => {
         }
         ++right;
     }
-    if (res.length === 0) {
-        res.push('Untitled');
-    }
-    if (res.length === 1) {
-        res.push('No additional notes');
+    if (!raw) {
+        if (res.length === 0) {
+            res.push('Untitled');
+        }
+        if (res.length === 1) {
+            res.push('No additional notes');
+        }
     }
     return res;
 };

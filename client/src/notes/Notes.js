@@ -21,7 +21,7 @@ const Notes = ({ notes, setNotes, authError, token }) => {
 
     const searchFilter = e => {
         const str = search.trim();
-        const textArr = getText(e.text);
+        const textArr = getText(e.text, true);
         for (const t of textArr) {
             if (t.includes(str)) {
                 return true;
@@ -169,10 +169,10 @@ const Notes = ({ notes, setNotes, authError, token }) => {
                                 }
                                 <div onClick={() => handleLoad(i)} className={`py-2 px-3 ${handleBorder(notes, i)} border-gray-400 shadow bg-white hover:bg-gray-100 cursor-pointer`}>
                                     <div className="font-semibold text-black  overflow-clip whitespace-pre">
-                                        {getText(e.text)[0]}
+                                        {getText(e.text, false)[0]}
                                     </div>
                                     <div className="text-gray-500 font-normal text-sm overflow-clip whitespace-pre">
-                                        {getText(e.text)[1]}
+                                        {getText(e.text, false)[1]}
                                     </div>
                                 </div>
                             </li>
