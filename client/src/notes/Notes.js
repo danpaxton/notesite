@@ -180,7 +180,7 @@ const Notes = ({ notes, setNotes, authError, token }) => {
                     }   
                     </ul>
                 </div>
-                <button onClick={handleNew} className="fixed bottom-10 right-10 p-6 rounded-full text-3xl shadow-lg shadow-gray-400 text-white bg-gray-800 hover:bg-gray-700">
+                <button onClick={handleNew} className="fixed bottom-10 right-10 md:bottom-24 md:right-24 p-6 rounded-full text-3xl shadow-lg shadow-gray-400 text-white bg-gray-800 hover:bg-gray-700">
                     <FaPenToSquare/>
                 </button>
             </div>
