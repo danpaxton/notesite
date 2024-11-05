@@ -12,7 +12,7 @@ const NoteEditor = ({ handleSave, note }) => {
   };
 
   return (
-    <div className=' no-scrollbar fixed top-24 h-5/6 w-full shadow-lg'>
+    <div className=' fixed top-24 h-5/6 w-full shadow-lg'>
       <Editor
         apiKey="j5j03cv3b4fs3ehd53fcxgds9xrm7ntj9k00hac9qwjpuz6h"
         onEditorChange={handleChange}
