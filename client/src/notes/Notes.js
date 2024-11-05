@@ -144,7 +144,7 @@ const Notes = ({ notes, setNotes, authError, token }) => {
             </div>
             :
             <div className="h-screen w-screen pt-12">
-                <div className="py-4 px-4 md:px-16 overflow-scroll flex flex-col gap-1">
+                <div className="py-4 px-4 md:px-16 h-full overflow-scroll flex flex-col gap-1">
                     <div className="text-3xl font-bold text-black">
                         Notes
                     </div>
