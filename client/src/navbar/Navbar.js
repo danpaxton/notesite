@@ -30,10 +30,10 @@ const Navbar = ({ setLoggedIn, loggedIn, authError, setNotes, token }) => {
     return (
         <nav className="bg-gray-800 fixed top-0 z-10 w-screen h-12 px-6 flex items-center">
             <div className="w-full flex justify-between items-center">
-                <div className="text-2xl text-white flex items-center gap-1 font-bold cursor-pointer">
+                <a href="https://github.com/danpaxton/notesite" target="_blank" rel="noreferrer" className="text-2xl text-white flex items-center gap-1 font-bold cursor-pointer">
                     <FaFileLines/>
                     Notesite
-                </div>
+                </a>
                 <button className="mx-2 font-bold text-white">
                     { loggedIn ?
                         <div onClick={handleLogout} className="hover:text-gray-300">
