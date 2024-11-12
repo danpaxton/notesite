@@ -1,37 +1,28 @@
 # Notesite
+App url: https://notesite-five.vercel.app/
+## Running client locally.
 
-## Install npm and clone respository
-To install npm visit https://github.com/nvm-sh/nvm#installing-and-updating
-
-Clone repository and navigate to main folder.
-```
-git clone https://github.com/danpaxton/notesite.git
-cd notesite
-```
-
-## Client
-To view the client in the web browser use these commands in the terminal.
-
-Navigate to directory.
-```
-cd client
+Clone repository.
+```console
+$ git clone https://github.com/danpaxton/notesite.git
+$ cd notesite
 ```
 
-Install dependencies and run client.
+Install client dependencies and run.
+```console
+$ cd client
+$ npm install
+$ npm run start
 ```
-npm install
-npm run start
-```
+The client should now be running on localhost port 3000.
 
-## Server
-Run the server from the command line.
+## Usage
 
-Navigate to directory.
-```
-cd server
-```
+### Notes
+The compose note button at the bottom right of the page can be used to create a new note. On click, the note editor will be displayed and any input will be autosaved. To return to the note list click the back arrow at the top left of the screen. If the note has no data it will automatically be deleted when the back arrow is clicked. To access a previously made note simply click on the note. Once a note is opened the icon at the top right of the page will expand options to bookmark or delete the note.
 
-Install dependencies and start server.
-```
-npm install
-npm run start
+## Frontend
+The frontend was built using React.js and makes requests to the backend using Axios. The app is styled with Tailwind CSS using fixed positioning and flex layouts. After login, a token is stored in local storage to authenticate updates and prevent logout on refresh.
+
+## Backend
+The backend was built using an express api and connects to a MongoDB database. User authentication was implemented using the jsonwebtoken library. The api supports user login, refresh authenticaiton, and CRUD operations.
