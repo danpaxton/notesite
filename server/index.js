@@ -38,11 +38,11 @@ app.post("/login", (req, res) => {
   let { username, password } = req.body;
   UserModel
     .findOne({ username })
-    .then(user => {
+    .then(async user => {
       if (!user) {
         return res.json({ success: false, message: 'Invalid credentials' });
       }
-      const auth = bcrypt.compare(password, user.password);
+      const auth = await bcrypt.compare(password, user.password);
       if (!auth) {
         return res.json({ success: false, message: 'Invalid credentials' });
       }
