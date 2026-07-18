@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
+import {FaFileLines  } from "react-icons/fa6"
 import { api } from '../App';
 
 const Login = ({ setNotes, setLoggedIn, setToken }) => {
@@ -10,7 +11,7 @@ const Login = ({ setNotes, setLoggedIn, setToken }) => {
 
     const validForm = () => {
         if (!username.trim() || !password.trim()) {
-            setError('Enter all fields')
+            setError('Enter all fields');
             return false;
         } else {
             setError('');
@@ -20,6 +21,9 @@ const Login = ({ setNotes, setLoggedIn, setToken }) => {
 
     const handleSignup = async () => {
         if (!validForm()) {
+            return;
+        } else if (password.trim().length < 8) {
+            setError('Password minimum 8 characters');
             return;
         }
         try {
@@ -33,7 +37,7 @@ const Login = ({ setNotes, setLoggedIn, setToken }) => {
                 setError(data.message);
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     };
     
@@ -53,7 +57,7 @@ const Login = ({ setNotes, setLoggedIn, setToken }) => {
                 setError(data.message);
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     };
 
@@ -66,9 +70,15 @@ const Login = ({ setNotes, setLoggedIn, setToken }) => {
     };
 
     return (
-        <div className="flex flex-col gap-3 items-center h-screen">
-            <div className="mt-20 md:mt-48 bg-white rounded-lg border border-gray-400 shadow text-black w-auto md:w-[450px] h-auto p-6">
-                <div className="flex flex-col items-center">
+        <div className="flex flex-col gap-3 items-center">
+            <div className="mt-20 md:mt-48 flex flex-col w-auto md:w-[450px] h-auto">
+                <div className="flex justify-center bg-gray-800 shadow-lg rounded-t-lg p-1">
+                    <a href="https://github.com/danpaxton/notesite" target="_blank" rel="noreferrer" className="text-2xl text-white flex items-center gap-1 font-bold cursor-pointer">
+                        <FaFileLines/>
+                        Notesite
+                    </a>
+                </div>
+                <div className="bg-white text-black shadow-lg rounded-b-lg p-6 flex flex-col items-center">
                     <div className="font-bold mb-2 w-full">Username</div>
                     <input onChange={handleUsername} type="text" className={`w-full p-3 border rounded ${error ? ' border-red-500' : 'border-gray-300'}`}/>
                     <div className="font-bold mb-2 w-full">Password</div>

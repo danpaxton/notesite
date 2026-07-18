@@ -12,9 +12,9 @@ const NoteEditor = ({ handleSave, note }) => {
   };
 
   return (
-    <div className=' fixed top-24 h-5/6 w-full shadow-lg'>
+    <div className='fixed top-12 h-full w-full'>
       <Editor
-        apiKey="j5j03cv3b4fs3ehd53fcxgds9xrm7ntj9k00hac9qwjpuz6h"
+        apiKey="cw7pan81prwtdm5q3o40peqtxppit0gftftsvwqja1lc1ao1"
         onEditorChange={handleChange}
         initialValue={note ? note.text : "" }
         init={{
